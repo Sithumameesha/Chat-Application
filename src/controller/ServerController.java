@@ -30,6 +30,45 @@ public class ServerController implements Initializable {
     public TextField txtMsg;
     public Button btnSend;
     private Server server;
+
+    public static void addLabel(String msgFromClient,VBox vBox){
+        HBox hBox= new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setPadding(new Insets(5,5,5,10));
+
+        Text text = new Text(msgFromClient);
+        TextFlow textFlow= new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
+        textFlow.setPadding(new Insets(5,5,5,10));
+        hBox.getChildren().add(textFlow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vBox.getChildren().add(hBox);
+
+            }
+        });
+
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            server = new Server(new ServerSocket(8000));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error Creating Server");
+        }
+        vbox_msgArea.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                //main.receiveClientMsg(vbox_msgArea);
+                main.setVvalue((Double)newValue);
+
+            }
+        });
+        server.receiveClientMsg(vbox_msgArea);
+
+    }
     public void sendOnAction(ActionEvent actionEvent) {
         String message =txtMsg.getText();
         if (!message.isEmpty()){
@@ -50,42 +89,6 @@ public class ServerController implements Initializable {
         }
 
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try {
-            server = new Server(new ServerSocket(800));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error Creating Server");
-        }
-        vbox_msgArea.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                //main.receiveClientMsg(vbox_msgArea);
-                main.setVvalue((Double)newValue);
 
-            }
-        });
-        server.receiveClientMsg(vbox_msgArea);
 
-    }
-    public static void addLabel(String sendMsgClient,VBox vBox){
-        HBox hBox= new HBox();
-        hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.setPadding(new Insets(5,5,5,10));
-
-        Text text = new Text(sendMsgClient);
-        TextFlow textFlow= new TextFlow(text);
-        textFlow.setStyle("-fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
-        textFlow.setPadding(new Insets(5,5,5,10));
-        hBox.getChildren().add(textFlow);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                vBox.getChildren().add(hBox);
-
-            }
-        });
-
-    }
 }

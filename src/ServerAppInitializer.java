@@ -15,4 +15,8 @@ public class ServerAppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+        AnchorPane pane = FXMLLoader.load(this.getClass().getResource("view/server.fxml"));
+        Scene scene= new Scene(pane);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }}
