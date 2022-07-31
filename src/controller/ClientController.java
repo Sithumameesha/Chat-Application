@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -61,6 +62,26 @@ public class ClientController implements Initializable {
             }
         });
 
-        client.receivemsgSever(vbox_msg);
+        client.receiveMsgSever(vbox_msg);
+    }
+    public  static void addLabel(String sendMsgServer,VBox vBox){
+        HBox hBox= new HBox();
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        hBox.setPadding(new Insets(5,5,5,10));
+
+        Text text = new Text(sendMsgServer);
+        TextFlow textFlow= new TextFlow(text);
+        textFlow.setStyle("-fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
+        textFlow.setPadding(new Insets(5,5,5,10));
+        hBox.getChildren().add(textFlow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vBox.getChildren().add(hBox);
+
+            }
+        });
+
+
     }
 }
