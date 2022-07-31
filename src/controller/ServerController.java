@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.prism.paint.Color;
 import com.sun.xml.internal.messaging.saaj.soap.impl.TextImpl;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -14,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import model.Server;
@@ -32,14 +32,14 @@ public class ServerController implements Initializable {
     private Server server;
 
     public static void addLabel(String msgFromClient,VBox vBox){
-        HBox hBox= new HBox();
+        HBox hBox = new HBox();
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.setPadding(new Insets(5,5,5,10));
+        hBox.setPadding(new Insets(5, 5, 5, 10));
 
         Text text = new Text(msgFromClient);
-        TextFlow textFlow= new TextFlow(text);
-        textFlow.setStyle("-fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
-        textFlow.setPadding(new Insets(5,5,5,10));
+        TextFlow textFlow = new TextFlow(text);
+        textFlow.setStyle(" -fx-background-color: rgb(233,233,255);"+" -fx-background-radius: 20px");
+        textFlow.setPadding(new Insets(5, 10, 5, 10));
         hBox.getChildren().add(textFlow);
         Platform.runLater(new Runnable() {
             @Override
@@ -72,15 +72,16 @@ public class ServerController implements Initializable {
     public void sendOnAction(ActionEvent actionEvent) {
         String message =txtMsg.getText();
         if (!message.isEmpty()){
-            HBox hBox=new HBox();
-            hBox.alignmentProperty();
-            hBox.setPadding(new Insets(5,5,5,10));
+            HBox hBox = new HBox();
+            hBox.setAlignment(Pos.CENTER_RIGHT);
 
-            Text text= new Text(message);
+            hBox.setPadding(new Insets(5, 5, 5, 10));
+            Text text = new Text(message);
             TextFlow textFlow = new TextFlow(text);
-            textFlow.setStyle(" -fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
-            textFlow.setPadding(new Insets(5,5,5,10));
-            //text.setFill(new Color(0.934,0.945,0.996));
+            textFlow.setStyle("-fx-color: rgb(239,242,255);"+"-fx-background-color: rgb(15,125,242);"+" -fx-background-radius: 20px");
+
+            textFlow.setPadding(new Insets(5, 10, 5, 10));
+            text.setFill(Color.color(0.934, 0.945, 0.996));
             hBox.getChildren().add(textFlow);
             vbox_msgArea.getChildren().add(hBox);
             server.sendMsgClient(message);

@@ -12,9 +12,14 @@
 
 <AnchorPane prefHeight="509.0" prefWidth="378.0" style="-fx-background-color: #7f8c8d;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientController">
    <children>
+      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="70.0" layoutY="22.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@assect/pngwing.com%20(33).png" />
+         </image>
+      </ImageView>
       <ScrollPane fx:id="main" layoutX="14.0" layoutY="86.0" prefHeight="361.0" prefWidth="358.0">
          <content>
-            <VBox fx:id="vbox_msg" prefHeight="398.0" prefWidth="358.0" style="-fx-background-color: #bdc3c7;" />
+            <VBox fx:id="vbox_msg" prefHeight="359.0" prefWidth="342.0" style="-fx-background-color: #bdc3c7;" />
          </content>
       </ScrollPane>
       <TextField fx:id="txtMsg" layoutX="14.0" layoutY="468.0" prefHeight="30.0" prefWidth="221.0" promptText="Type Here" />
@@ -27,10 +32,5 @@
             <Font name="System Bold" size="23.0" />
          </font>
       </Label>
-      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="70.0" layoutY="22.0" pickOnBounds="true" smooth="false">
-         <image>
-            <Image url="@assect/pngwing.com%20(33).png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
