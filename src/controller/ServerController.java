@@ -2,6 +2,7 @@ package controller;
 
 import com.sun.prism.paint.Color;
 import com.sun.xml.internal.messaging.saaj.soap.impl.TextImpl;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -59,10 +60,12 @@ public class ServerController implements Initializable {
         vbox_msgArea.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                main.receiveclientmsg(vbox_msgArea);
+                //main.receiveClientMsg(vbox_msgArea);
+                main.setVvalue((Double)newValue);
 
             }
         });
+        server.receiveClientMsg(vbox_msgArea);
 
     }
     public static void addLabel(String sendMsgClient,VBox vBox){
@@ -73,7 +76,15 @@ public class ServerController implements Initializable {
         Text text = new Text(sendMsgClient);
         TextFlow textFlow= new TextFlow(text);
         textFlow.setStyle("-fx-background-color: rgb(233,233,255);\"+\" -fx-background-radius: 20px");
-        textFlow.setPadding();
+        textFlow.setPadding(new Insets(5,5,5,10));
+        hBox.getChildren().add(textFlow);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                vBox.getChildren().add(hBox);
+
+            }
+        });
 
     }
 }
