@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class Server{
     private ServerSocket serverSocket;
     private Socket socket;
     private BufferedReader bufferedReader;
@@ -25,9 +25,9 @@ public class Server {
         }
     }
 
-    public void sendMsgClient(String message) {
+    public void sendMsgClient(String messageToClient) {
         try {
-            bufferedWriter.write(message);
+            bufferedWriter.write(messageToClient);
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException e) {

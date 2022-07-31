@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ServerController implements Initializable {
+
     public ScrollPane main;
     public VBox vbox_msgArea;
     public TextField txtMsg;

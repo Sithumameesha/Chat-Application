@@ -1,5 +1,6 @@
 package model;
 
+import controller.ClientController;
 import controller.ServerController;
 import javafx.scene.layout.VBox;
 
@@ -21,33 +22,32 @@ public class Client {
             System.out.println("Error creating client.");
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
+    }
 
-}
-    public void sendMsgServer(String message) {
+    public void sendMassageSever(String messageToSever){
         try {
-            bufferedWriter.write(message);
+            bufferedWriter.write(messageToSever);
             bufferedWriter.newLine();
             bufferedWriter.flush();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error sending message to the client");
+            System.out.println("Error sending message to the Sever");
             closeEverything(socket, bufferedReader, bufferedWriter);
         }
     }
-    public void receiveMsgSever(VBox vBox) {
+
+    public void receivedMessageFormSever(VBox vBox) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while (socket.isConnected()) {
                     try {
-
-
-                        String massageFromClient = bufferedReader.readLine();
-                        ServerController.addLabel(massageFromClient, vBox);
+                        String massageFromSever = bufferedReader.readLine();
+                        ClientController.addLabel(massageFromSever, vBox);
                     } catch (IOException e) {
                         e.printStackTrace();
-                        System.out.println("Error receiving message from the client");
-                         closeEverything(socket, bufferedReader, bufferedWriter);
+                        System.out.println("Error receiving message from the Sever");
+                        closeEverything(socket, bufferedReader, bufferedWriter);
                         break;
                     }
                 }
@@ -55,6 +55,7 @@ public class Client {
             }
         }).start();
     }
+
     public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
         try {
             if (bufferedReader != null) {
